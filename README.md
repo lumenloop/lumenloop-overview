@@ -30,7 +30,7 @@ Lumen Loop exists to close all three gaps at once with a single, always-current,
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                              EXTERNAL  SOURCES                                  │
 │   project sites + blogs      social posts       community calendars     repos  │
-│     (RSS · sitemaps)          (X · Reddit)        (Luma · Discord)      (GitHub)│
+│     (AI crawl · RSS)          (X · Reddit)        (Luma · Discord)      (GitHub)│
 └──────────┬──────────────────────┬──────────────────────┬──────────────────┬────┘
            │                      │                      │                  │
            ▼                      ▼                      ▼                  ▼
@@ -136,7 +136,7 @@ The same data is exposed for tools and agents: an RSS feed of the latest article
 It starts with a project's website. Lumen Loop crawls it and reads off the things that matter: the project's social accounts (X, GitHub, Discord), its blog, and any RSS feeds. From one homepage, the system learns where that project actually publishes.
 
 ### 2. Monitoring: watch the official channels
-Those discovered sources then get watched continuously. New blog posts (via RSS and sitemaps), new videos, and new scheduled events are picked up as they appear, straight from each project's own official channels. This is the high-trust spine of the system: a project's own outputs, monitored at the source.
+Those discovered sources then get watched continuously. New blog posts (via RSS and sitemaps), new videos, and new scheduled events are picked up as they appear, straight from each project's own official channels. Where a blog has no feed at all, Lumen Loop crawls the page itself and uses AI to read the list of posts and pull out the new ones, then fetches each one and extracts the article. Coverage does not depend on a project publishing a clean RSS feed. This is the high-trust spine of the system: a project's own outputs, monitored at the source.
 
 ### 3. Social discovery: catch what the official channels miss
 Not everything announces itself through an RSS feed. So Lumen Loop also follows public posts on social platforms (X and Reddit) and the community's public event calendars, through official platform APIs and public feeds. When something relevant surfaces there (a shared link, a thread, a scheduled live session, an event), it gets pulled into the same pipeline. Only public, non-authenticated content is used. Social is where discovery happens; the official channels are where it gets confirmed and enriched.
