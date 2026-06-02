@@ -27,57 +27,56 @@ Lumen Loop exists to close all three gaps at once with a single, always-current,
 ## Architecture at a glance
 
 ```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                              EXTERNAL  SOURCES                                  │
-│  project sites + blogs         social posts   community calendars   repos    │
-│  (AI crawl · RSS · sitemaps)   (X · Reddit)   (Luma · Discord)      (GitHub) │
-└───────────────┬─────────────────────┬────────────────┬─────────────────┬─────┘
-                │                     │                │                 │      
-                ▼                     ▼                ▼                 ▼      
-┌──────────────────────────────────────────────────────────────────────────────┐
-│   DISCOVER  →  MONITOR                                                          │
-│   crawl a project's site → learn its X / GitHub / blog / RSS → watch those      │
-│   official channels for anything new; pick up links people share on X & Reddit  │
-└────────────────────────────────────┬───────────────────────────────────────────┘
-                                      ▼
-                          ┌───────────────────────┐
-                          │   TRIAGE  (one door)  │   classify each item:
-                          │   fetch · clean ·     │   article · event · video ·
-                          │   classify · route    │   job · noise → route or drop
-                          └───────────┬───────────┘
-                                      ▼
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                               EXTERNAL  SOURCES                                │
+│  project sites + blogs          social posts    community calendars   repos    │
+│  (AI crawl · RSS · sitemaps)    (X · Reddit)    (Luma · Discord)      (GitHub) │
+└───────────────┬───────────────────────┬─────────────────┬─────────────────┬────┘
+                │                       │                 │                 │
+                ▼                       ▼                 ▼                 ▼
+┌────────────────────────────────────────────────────────────────────────────────┐
+│  DISCOVER  →  MONITOR                                                          │
+│  crawl a project's site → learn its X / GitHub / blog / RSS → watch those      │
+│  official channels for anything new; pick up links people share on X & Reddit  │
+└───────────────────────────────────────┬────────────────────────────────────────┘
+                                        ▼
+                            ┌───────────────────────┐
+                            │   TRIAGE  (one door)  │   classify each item:
+                            │   fetch · clean ·     │   article · event · video ·
+                            │   classify · route    │   job · noise → route/drop
+                            └───────────┬───────────┘
+                                        ▼
               every item flows:  discovered → enriched → published
-                                      │
-                                      ▼
-┌──────────────────────────────────────────────────────────────────────────────┐
-│   AGENTIC  ENRICHMENT     (LLMs + autonomous agents)                           │
-│   • summarize & write editorial copy      • tie content → the right project(s)  │
-│   • tag + categorize                       • vector embeddings (semantic search) │
-│   • extract entities (people/orgs/tokens)  • classify events (region/calendar)   │
-│   • self-managing agents: enrich projects · resolve source conflicts · triage Q  │
-└────────────────────────────────────┬───────────────────────────────────────────┘
-                                      ▼
-                       ┌──────────────────────────────┐
-                       │   ENRICHED  ECOSYSTEM  STORE  │
-                       │   PostgreSQL + vector index   │
-                       │   projects ⇄ content ⇄ funding│
-                       │              ⇄ repos          │
-                       └───┬───────────┬───────────┬────┘
-                           │           │           │
-            ┌──────────────┘           │           └──────────────┐
-            ▼                          ▼                          ▼
-     ┌─────────────┐         ┌────────────────────┐      ┌──────────────────┐
-     │ PUBLIC SITE │         │  OPEN ECOSYSTEM DB │      │   EXTERNAL  MCP   │
-     │ news·events │         │  (GitHub, open     │      │  query the corpus │
-     │ projects·…  │         │  YAML, git-tracked)│      │  with an AI agent │
-     └──────┬──────┘         └────────────────────┘      └──────────────────┘
+                                        ▼
+┌────────────────────────────────────────────────────────────────────────────────┐
+│  AGENTIC  ENRICHMENT     (LLMs + autonomous agents)                            │
+│  • summarize & write editorial copy       • tie content → the right project(s) │
+│  • tag + categorize                       • vector embeddings (semantic search)│
+│  • extract entities (people/orgs/tokens)  • classify events (region/calendar)  │
+│  • self-managing agents: enrich projects · resolve conflicts · triage          │
+└───────────────────────────────────────┬────────────────────────────────────────┘
+                                        ▼
+                        ┌──────────────────────────────┐
+                        │  ENRICHED  ECOSYSTEM  STORE  │
+                        │  PostgreSQL + vector index   │
+                        │ projects ⇄ content ⇄ funding │
+                        │           ⇄ repos            │
+                        └───┬───────────┬───────────┬──┘
+                            │           │           │
+            ┌───────────────┘           │           └─────────────┐
+            ▼                           ▼                         ▼
+     ┌─────────────┐         ┌────────────────────┐     ┌──────────────────┐
+     │ PUBLIC SITE │         │ OPEN ECOSYSTEM DB  │     │  EXTERNAL  MCP   │
+     │news · events│         │   (GitHub, open    │     │ query the corpus │
+     │projects · … │         │ YAML, git-tracked) │     │ with an AI agent │
+     └──────┬──────┘         └────────────────────┘     └──────────────────┘
             │
             ▼   …and the loop closes:
-     ┌──────────────────────────────────────────────────────────────────────┐
-     │   AUTOMATED  DISTRIBUTION                                             │
-     │   agents spot what's under-covered → draft → schedule → publish via   │
-     │   official platform APIs to X · Discord · Reddit · Telegram · Bluesky │
-     └──────────────────────────────────────────────────────────────────────┘
+     ┌────────────────────────────────────────────────────────────────────────┐
+     │   AUTOMATED  DISTRIBUTION                                              │
+     │   agents spot what's under-covered → draft → schedule → publish via    │
+     │   official platform APIs to X · Discord · Reddit · Telegram · Bluesky  │
+     └────────────────────────────────────────────────────────────────────────┘
 ```
 
 Read it left to right, top to bottom: public sources flow in on the left, get understood and connected in the middle, and flow out on the right into a public website, an open database, an agent-queryable API, and a distribution engine that pushes the best of it back out to the community.
