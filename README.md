@@ -29,11 +29,11 @@ Lumen Loop exists to close all three gaps at once with a single, always-current,
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                              EXTERNAL  SOURCES                                  │
-│   project sites + blogs      social posts       community calendars     repos  │
-│     (AI crawl · RSS)          (X · Reddit)        (Luma · Discord)      (GitHub)│
-└──────────┬──────────────────────┬──────────────────────┬──────────────────┬────┘
-           │                      │                      │                  │
-           ▼                      ▼                      ▼                  ▼
+│  project sites + blogs         social posts   community calendars   repos    │
+│  (AI crawl · RSS · sitemaps)   (X · Reddit)   (Luma · Discord)      (GitHub) │
+└───────────────┬─────────────────────┬────────────────┬─────────────────┬─────┘
+                │                     │                │                 │      
+                ▼                     ▼                ▼                 ▼      
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │   DISCOVER  →  MONITOR                                                          │
 │   crawl a project's site → learn its X / GitHub / blog / RSS → watch those      │
