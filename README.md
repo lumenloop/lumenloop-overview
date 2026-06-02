@@ -4,6 +4,8 @@
 
 One place to find every project, story, event, video, job, and governance vote across Stellar, kept current by a fleet of AI agents that watch the ecosystem so you don't have to.
 
+**[lumenloop.com](https://lumenloop.com)**  ·  [Ecosystem calendar](https://luma.com/lumenloop)  ·  [Open ecosystem database](https://github.com/lumenloop/stellar-ecosystem-db)
+
 Lumen Loop is part live ecosystem feed, part canonical project directory, part research desk, and part marketing co-pilot. Under the hood it is an agentic content platform: it discovers what is happening across the ecosystem, understands it, ties it back to the projects it belongs to, and publishes it in formats people and machines can both use.
 
 ---
@@ -106,7 +108,7 @@ A browsable, searchable directory of the ecosystem's projects. Each card shows c
 Anyone can suggest a missing link or correct a field straight from the project page. Those suggestions land in a review queue rather than overwriting data directly.
 
 ### Events: a subscribable ecosystem calendar
-Upcoming conferences, meetups, online sessions, and live audio rooms across the ecosystem, deduplicated across sources and shown in your local timezone. Source data comes from community event calendars and scheduled events on community servers. The calendar is **subscribable**: one click exports an iCal / `webcal://` feed you can add to Google Calendar, Apple Calendar, or Outlook, and it stays live as new events are discovered. A searchable archive holds everything that already happened.
+Upcoming conferences, meetups, online sessions, and live audio rooms across the ecosystem, deduplicated across sources and shown in your local timezone. Source data comes from community event calendars (including the [Lumen Loop calendar on Luma](https://luma.com/lumenloop)) and scheduled events on community servers. The calendar is **subscribable**: one click exports an iCal / `webcal://` feed you can add to Google Calendar, Apple Calendar, or Outlook, and it stays live as new events are discovered. A searchable archive holds everything that already happened.
 
 ### Media: searchable video, audio, and Spaces
 An index of publicly available ecosystem talks, podcasts, and recorded live audio rooms. Content stays hosted at its source and plays through embedded players, and Lumen Loop adds **searchable transcripts** for indexing, so you can find the exact moment a topic was discussed, not just the right video.
@@ -173,7 +175,7 @@ Each project record tracks, per field, what every source said (the project's own
 
 Each project is more than a profile, it is a set of structured, comparable data verticals: funding, dev activity, audits, token and on-chain data, geography, social reach, and content coverage. Because these all hang off the same canonical record, you can line them up against each other and ask cross-cutting questions: which regions attract the most funding relative to their development activity, which funded projects still lack an audit, how on-chain traction tracks against grant size. The directory is not just a list to browse, it is a queryable dataset of the ecosystem that an analyst or an AI agent can interrogate directly.
 
-That canonical directory then **syncs out to an open, public database on GitHub** as plain YAML, one file per project. The export mirrors the current visible directory, and git history preserves every change over time. Fields that are still in conflict are held back from the public export until they are resolved, so the open data stays clean. The result is exactly what the foundation and the wider community need: a continuously updated, transparent, forkable map of the ecosystem that nobody has to maintain by hand. (Lumen Loop seeded itself from that same open database, and now keeps it current.)
+That canonical directory then **syncs out to an [open, public database on GitHub](https://github.com/lumenloop/stellar-ecosystem-db)** as plain YAML, one file per project. The export mirrors the current visible directory, and git history preserves every change over time. Fields that are still in conflict are held back from the public export until they are resolved, so the open data stays clean. The result is exactly what the foundation and the wider community need: a continuously updated, transparent, forkable map of the ecosystem that nobody has to maintain by hand. (Lumen Loop seeded itself from that same open database, and now keeps it current.)
 
 ---
 
