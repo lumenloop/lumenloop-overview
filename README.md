@@ -95,10 +95,12 @@ Every meaningful article, announcement, and analysis piece from across the ecosy
 ### Projects: the canonical directory
 A browsable, searchable directory of the ecosystem's projects. Each card shows category, tags, funding and audit badges, and links. Open a project and you get a full profile that ties together, in one place:
 
-- **Funding**: its Stellar Community Fund submissions, awards, and history.
-- **Content**: every article, video, research piece, and social post about it, collected automatically.
-- **Repos and activity**: GitHub stats and links, so you can see whether a project is actually shipping.
-- **Links and on-chain data**: website, socials, docs, and (for live tokens) a price chart from an on-chain oracle.
+- **Funding**: its Stellar Community Fund submissions, awards, rounds, and budgets.
+- **Dev activity**: GitHub stats (stars, forks, recent commits, contributors), so you can see whether a project is actually shipping.
+- **Audits**: security audit reports, plus an at-a-glance audited badge.
+- **Token and on-chain data**: issued assets, deployed contracts, DeFi metrics where applicable, and (for live tokens) a price chart from an on-chain oracle.
+- **Geography**: where the team is based and the regions it operates in.
+- **Content and coverage**: every article, video, research piece, and social post about it, collected automatically.
 - **Related projects**: neighbors found by category, tags, and semantic similarity.
 
 Anyone can suggest a missing link or correct a field straight from the project page. Those suggestions land in a review queue rather than overwriting data directly.
@@ -168,6 +170,8 @@ These agents are **self-improving**: anything a human reviews and confirms becom
 The directory is the canonical record, and it is built to stay trustworthy when many sources disagree.
 
 Each project record tracks, per field, what every source said (the project's own site, GitHub, the grant program, community submissions, internal edits). A resolver computes the winning value using clear policies (prefer this source, lock this value, merge these lists), and any field where sources genuinely conflict is flagged rather than guessed. When policy alone cannot settle a disagreement, an agent resolves it from evidence: it reads the field's history and verifies the competing values against the project's own live site and links before committing an answer that sticks, so the directory effectively corrects itself over time. The canonical record never auto-deletes a project just because an upstream source went quiet: projects can be hidden or, rarely, removed by hand, but a source dropping a project never silently erases it.
+
+Each project is more than a profile, it is a set of structured, comparable data verticals: funding, dev activity, audits, token and on-chain data, geography, social reach, and content coverage. Because these all hang off the same canonical record, you can line them up against each other and ask cross-cutting questions: which regions attract the most funding relative to their development activity, which funded projects still lack an audit, how on-chain traction tracks against grant size. The directory is not just a list to browse, it is a queryable dataset of the ecosystem that an analyst or an AI agent can interrogate directly.
 
 That canonical directory then **syncs out to an open, public database on GitHub** as plain YAML, one file per project. The export mirrors the current visible directory, and git history preserves every change over time. Fields that are still in conflict are held back from the public export until they are resolved, so the open data stays clean. The result is exactly what the foundation and the wider community need: a continuously updated, transparent, forkable map of the ecosystem that nobody has to maintain by hand. (Lumen Loop seeded itself from that same open database, and now keeps it current.)
 
