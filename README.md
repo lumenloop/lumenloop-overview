@@ -155,7 +155,7 @@ Every item moves through a simple, visible status pipeline (discovered, then enr
 A fleet of autonomous agents keeps the data healthy without a human in the loop for routine work:
 
 - One agent fills gaps on thin project records (missing category, tags, or region) by researching across the corpus and the live web, proposing values with a confidence score.
-- Another reconciles disagreements when sources describe the same project differently, checking which links are still live and locking in a resolution so the same conflict does not recur.
+- When sources disagree about a project (its description, category, links, or which social account is really theirs), an agent investigates instead of just picking one. It pulls the field's full change history from the database and checks the competing values against external ground truth (the project's own live website and links), reasons about which is correct, then locks in the resolution and records the rejected value so it never gets re-proposed. The same conflict does not come back.
 - A third rewrites weak project descriptions and flags projects that have gone quiet.
 - A fourth reviews the incoming pipeline each day, handles the clear cases on its own, and proposes durable rules when it spots a bad pattern (for example, a domain that keeps producing off-topic or spam content).
 
@@ -167,7 +167,7 @@ These agents are **self-improving**: anything a human reviews and confirms becom
 
 The directory is the canonical record, and it is built to stay trustworthy when many sources disagree.
 
-Each project record tracks, per field, what every source said (the project's own site, GitHub, the grant program, community submissions, internal edits). A resolver computes the winning value using clear policies (prefer this source, lock this value, merge these lists), and any field where sources genuinely conflict is flagged rather than guessed. The canonical record never auto-deletes a project just because an upstream source went quiet: projects can be hidden or, rarely, removed by hand, but a source dropping a project never silently erases it.
+Each project record tracks, per field, what every source said (the project's own site, GitHub, the grant program, community submissions, internal edits). A resolver computes the winning value using clear policies (prefer this source, lock this value, merge these lists), and any field where sources genuinely conflict is flagged rather than guessed. When policy alone cannot settle a disagreement, an agent resolves it from evidence: it reads the field's history and verifies the competing values against the project's own live site and links before committing an answer that sticks, so the directory effectively corrects itself over time. The canonical record never auto-deletes a project just because an upstream source went quiet: projects can be hidden or, rarely, removed by hand, but a source dropping a project never silently erases it.
 
 That canonical directory then **syncs out to an open, public database on GitHub** as plain YAML, one file per project. The export mirrors the current visible directory, and git history preserves every change over time. Fields that are still in conflict are held back from the public export until they are resolved, so the open data stays clean. The result is exactly what the foundation and the wider community need: a continuously updated, transparent, forkable map of the ecosystem that nobody has to maintain by hand. (Lumen Loop seeded itself from that same open database, and now keeps it current.)
 
